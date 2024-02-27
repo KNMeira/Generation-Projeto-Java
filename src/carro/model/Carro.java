@@ -1,6 +1,6 @@
 package carro.model;
 
-public abstract class Carro {
+public class Carro {
 	
 	protected String modeloCarro, placaCarro;
 	protected int idCarro, anoCarro;

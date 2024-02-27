@@ -22,7 +22,7 @@ public class CarroController implements CarroRepository {
 		
 	}
 
-	private Object buscarNaCollection(int idCarro) {
+	public Object buscarNaCollection(int idCarro) {
 		
 		return null;
 	}
@@ -30,7 +30,12 @@ public class CarroController implements CarroRepository {
 	@Override
 	public void listarTodos() {
 		for (var carro : listaCarros) {
-			System.out.println(listaCarros);
+			System.out.println(carro.getModeloCarro());
+			System.out.println(carro.getIdCarro());
+			System.out.println(carro.getAnoCarro());
+			System.out.println(carro.getPlacaCarro());
+			System.out.println(carro.getPrecoCarro());
+			System.out.println("*****");
 		}
 		
 	}

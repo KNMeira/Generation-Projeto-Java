@@ -62,17 +62,20 @@ public class Menu {
 				System.out.println(Cores.TEXT_PURPLE + "\n Cadastrar Carro");
 				System.out.println("Digite o ID do Carro: ");
 				idCarro = scanner.nextInt();
+				scanner.skip("\\R?");
 				System.out.println("Digite o Modelo do Carro: ");
 				modeloCarro = scanner.nextLine();
+				
 				System.out.println("Digite a Placa do Carro: ");
-				scanner.skip("\\R?");
 				placaCarro = scanner.nextLine();
+				
 				System.out.println("Digite o ano do Carro");
 				anoCarro = scanner.nextInt();
+				scanner.skip("\\R?");
 				System.out.println("Digite o preço do Carro");
 				precoCarro = scanner.nextFloat();
 				
-				
+				carros.cadastrar(new Carro(modeloCarro, placaCarro, idCarro, anoCarro, precoCarro));
 				
 				keyPress();
 				break;
@@ -97,7 +100,11 @@ public class Menu {
 				System.out.println("Digite o número do ID do Carro: ");
 				idCarro = scanner.nextInt();
 				
-				//logica
+				var buscaCarro = carros.buscarNaCollection(idCarro);
+				
+				if(buscaCarro != null) {
+					
+				}
 
 				keyPress();
 				break;
