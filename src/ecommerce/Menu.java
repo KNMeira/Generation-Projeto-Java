@@ -5,6 +5,7 @@ import java.util.*;
 
 import carro.controller.CarroController;
 import carro.model.Carro;
+import carro.model.CarroZero;
 import carro.util.Cores;
 
 public class Menu {
@@ -15,13 +16,13 @@ public class Menu {
 		
 		int opcao;
 		String modeloCarro, placaCarro;
-		int idCarro, anoCarro;
-		float precoCarro;
+		int idCarro, anoCarro, anosGarantia;
+		float precoCarro, precoCarroAtualizado;
 		
 		CarroController carros = new CarroController();
 		
 		while (true) {
-
+			System.out.println(Cores.TEXT_RED + Cores.ANSI_WHITE_BACKGROUND_BRIGHT);
 			System.out.println("*****************************************************");
 			System.out.println("                                                     ");
 			System.out.println("               ESTACIONAMENTO GENERATION             ");
@@ -46,7 +47,7 @@ public class Menu {
 			}catch(InputMismatchException e){
 				System.out.println("\nDigite valores inteiros!");
 				scanner.nextLine();
-				opcao=0;
+				opcao = 0;
 			}
 
 			if (opcao == 9) {
@@ -59,7 +60,7 @@ public class Menu {
 			scanner.nextLine();
 			switch (opcao) {
 			case 1:
-				System.out.println(Cores.TEXT_PURPLE + "\n Cadastrar Carro");
+				System.out.println(Cores.TEXT_PURPLE + "\nCadastrar Carro");
 				System.out.println("Digite o ID do Carro: ");
 				idCarro = scanner.nextInt();
 				scanner.skip("\\R?");
@@ -74,18 +75,21 @@ public class Menu {
 				scanner.skip("\\R?");
 				System.out.println("Digite o preço do Carro");
 				precoCarro = scanner.nextFloat();
+				scanner.skip("\\R?");
+				System.out.println("Digite a quantidade de anos de garantia do Carro");
+				anosGarantia = scanner.nextInt();
 				
-				carros.cadastrar(new Carro(modeloCarro, placaCarro, idCarro, anoCarro, precoCarro));
+				carros.cadastrar(new CarroZero(modeloCarro, placaCarro, idCarro, anoCarro, precoCarro, anosGarantia));
 				
 				keyPress();
 				break;
 			case 2:
-				System.out.println(Cores.TEXT_BLUE + "\n Listar todos Carros");
+				System.out.println(Cores.TEXT_BLUE + "\nListar todos Carros");
 				carros.listarTodos();
 				keyPress();
 				break;
 			case 3:
-				System.out.println(Cores.TEXT_YELLOW + "\n Buscar Carro por ID");
+				System.out.println(Cores.TEXT_YELLOW + "\nBuscar Carro por ID");
 				
 				System.out.println("Digite o número do ID do Carro: ");
 				idCarro = scanner.nextInt();
@@ -95,7 +99,7 @@ public class Menu {
 				keyPress();
 				break;
 			case 4:
-				System.out.println(Cores.TEXT_GREEN + "\n Atualizar dados do Carro");
+				System.out.println(Cores.TEXT_GREEN + "\nAtualizar Preço do Carro");
 				
 				System.out.println("Digite o número do ID do Carro: ");
 				idCarro = scanner.nextInt();
@@ -103,13 +107,15 @@ public class Menu {
 				var buscaCarro = carros.buscarNaCollection(idCarro);
 				
 				if(buscaCarro != null) {
-					
+					System.out.println("Digite o novo Preço do Carro: ");
+					precoCarroAtualizado = scanner.nextFloat();
+					carros.atualizar(idCarro, precoCarroAtualizado);
 				}
 
 				keyPress();
 				break;
 			case 5:
-				System.out.println(Cores.TEXT_RED + "\n Apagar Carro");
+				System.out.println(Cores.TEXT_RED + "\nApagar Carro");
 				
 				System.out.println("Digite o número do ID do Carro: ");
 				idCarro = scanner.nextInt();
