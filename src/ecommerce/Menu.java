@@ -3,6 +3,7 @@ package ecommerce;
 import java.io.IOException;
 import java.util.*;
 
+import carro.controller.CarroController;
 import carro.model.Carro;
 import carro.util.Cores;
 
@@ -14,8 +15,10 @@ public class Menu {
 		
 		int opcao;
 		String modeloCarro, placaCarro;
-		int idCarro = 0, anoCarro;
+		int idCarro, anoCarro;
 		float precoCarro;
+		
+		CarroController carros = new CarroController();
 		
 		while (true) {
 
@@ -31,6 +34,7 @@ public class Menu {
 			System.out.println("            4 - Atualizar Dados do Carro             ");
 			System.out.println("            5 - Apagar Carro                         ");
 			System.out.println("            9 - Sair                                 ");
+			System.out.println("                                                     ");
 			System.out.println("*****************************************************");
 			System.out.println("Entre com a opção desejada:                          ");
 			System.out.println("                                                     ");
@@ -70,10 +74,51 @@ public class Menu {
 				
 				
 				
+				keyPress();
 				break;
 			case 2:
-				System.out.println(idCarro);
-			}}}
+				System.out.println(Cores.TEXT_BLUE + "\n Listar todos Carros");
+				carros.listarTodos();
+				keyPress();
+				break;
+			case 3:
+				System.out.println(Cores.TEXT_YELLOW + "\n Buscar Carro por ID");
+				
+				System.out.println("Digite o número do ID do Carro: ");
+				idCarro = scanner.nextInt();
+				
+				carros.procurarPorId(idCarro);
+				
+				keyPress();
+				break;
+			case 4:
+				System.out.println(Cores.TEXT_GREEN + "\n Atualizar dados do Carro");
+				
+				System.out.println("Digite o número do ID do Carro: ");
+				idCarro = scanner.nextInt();
+				
+				//logica
+
+				keyPress();
+				break;
+			case 5:
+				System.out.println(Cores.TEXT_RED + "\n Apagar Carro");
+				
+				System.out.println("Digite o número do ID do Carro: ");
+				idCarro = scanner.nextInt();
+				
+				carros.deletar(idCarro);
+				
+				keyPress();
+				break;
+			default:
+				System.out.println("\nOpção Inválida" + Cores.TEXT_RESET);
+				
+				keyPress();
+				break;
+			}
+		}
+	}
 
 	private static void keyPress() {
 		try {
